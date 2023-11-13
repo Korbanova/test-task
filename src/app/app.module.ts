@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {LayoutComponent} from "../shared/layout/layout.component";
 import {HeaderComponent} from "../shared/layout/header/header.component";
+import {RouterModule} from "@angular/router";
 @NgModule({
     declarations: [
         AppComponent,
@@ -14,6 +15,8 @@ import {HeaderComponent} from "../shared/layout/header/header.component";
     ],
     imports: [
         BrowserModule,
+        AppRoutingModule,
+        RouterModule,
         AppRoutingModule,
         CoreModule
     ],

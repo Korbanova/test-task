@@ -28,7 +28,7 @@
                             "src/assets"
                         ],
                         "styles": [
-                            "src/styles.less"
+                            "src/assets/styles/styles.less"
                         ],
                         "scripts": []
                     },
