@@ -1,0 +1,48 @@
+<section class="login" [formGroup]="loginForm">
+    <div class="container">
+        <div class="auth-form">
+            <div class="auth-title">
+                Войти в личный кабинет
+            </div>
+            <div class="auth-inputs">
+                <div class="auth-input">
+                    <input type="text" class="input" placeholder="Электронная почта"
+                           [ngStyle]="{'border-color': loginForm.get('email')?.invalid
+                 && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched) ?'red': ''}"
+                           formControlName="email">
+
+                    <div class="invalid-feedback"
+                         *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)">
+                        <div *ngIf="loginForm.get('email')?.errors?.['required']">
+                            email должен быть заполнен.
+                        </div>
+                        <div *ngIf="loginForm.get('email')?.errors?.['email']">
+                            email некорректный.
+                        </div>
+                    </div>
+                </div>
+                <div class="auth-input">
+                    <input type="password" class="input" placeholder="Пароль"
+                           [ngStyle]="{'border-color': loginForm.get('password')?.invalid
+                 && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched) ?'red': ''}"
+                           formControlName="password">
+                    <div class="invalid-feedback"
+                         *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)">
+                        <div *ngIf="loginForm.get('password')?.errors?.['required']">
+                            Пароль должен быть заполнен.
+                        </div>
+                        <div *ngIf="loginForm.get('password')?.errors?.['password']">
+                            Пароль некорректный.
+                        </div>
+                    </div>
+                </div>
+                <div class="auth-button">
+                    <button class="button"
+                            [disabled]="loginForm.invalid"
+                            (click)="login()">
+                        Войти</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
