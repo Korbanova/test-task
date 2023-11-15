@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core'
 import {DefaultResponseType} from "../../types/default-response.type";
 import {LoginResponseType} from "../../types/login-response.type";
 import {Observable, Subject} from "rxjs";
+import {UserInfoType} from "../../types/user-info.type";
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
@@ -15,11 +16,20 @@ export class AuthService {
     }
 
     public login(email: string, password: string): Observable<DefaultResponseType | LoginResponseType> {
+
         if(email === 'test@test'){
             return new Observable(observer => {
                 observer.next({
                     error: true,
                     message: 'Получена ошибка'
+                })
+            })
+        }
+        if(email === 'test2@test'){
+            return new Observable(observer => {
+                observer.error({
+                    error: true,
+                    message: 'Получена ошибка2'
                 })
             })
         }
@@ -32,17 +42,13 @@ export class AuthService {
                 }
             })
         })
-        // return this.http.post<DefaultResponseType | LoginResponseType>('environment.api' + 'login', {
-        //     email,
-        //     password
-        // })
     }
 
     getIsLoggedIn() {
         return this.isLogged;
     }
 
-    public setUserInfoInStorage(info: {userName: string, userLastName: string, userRole: string}): void {
+    public setUserInfoInStorage(info: UserInfoType): void {
         localStorage.setItem(this.userInfoKey, JSON.stringify(info));
         this.isLogged = true;
         this.isLogged$.next(true);
@@ -50,9 +56,11 @@ export class AuthService {
 
     public removeUserInfo(): void {
         localStorage.removeItem(this.userInfoKey);
+        this.isLogged = false;
+        this.isLogged$.next(false);
     }
 
-    public getUserInfo(): LoginResponseType | null {
+    public getUserInfo(): UserInfoType | null {
         const userinfo: string | null = localStorage.getItem(this.userInfoKey);
         if (userinfo) {
             return JSON.parse(userinfo);

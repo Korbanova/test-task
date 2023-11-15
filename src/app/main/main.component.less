@@ -1,0 +1,37 @@
+@import "../../assets/styles/_variables";
+.main {
+    .container {
+        .main-menu {
+            nav ul {
+                display: flex;
+                margin: 0;
+                padding: 0;
+
+                li {
+                    margin-right: 30px;
+                    padding-bottom: 5px;
+                    list-style: none;
+                    transition: 0.5s transform; /* Время эффекта */
+                    text-align: center;
+
+                    &:hover {
+                        transform: scale(1.2);
+                    }
+                    &:active {
+                        border-bottom: 1px solid @blue-text-color;
+                    }
+
+                    a {
+                        color: @blue-text-color;
+                        cursor: pointer;
+                        text-decoration: none;
+
+                        &.active {
+                            color: @purple-text-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

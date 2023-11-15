@@ -1,0 +1,61 @@
+@import "../../../assets/styles/_variables";
+
+.header {
+    padding: 40px 0;
+
+    .container {
+        .header-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 10px;
+            border-bottom: 1px solid @gray-text-color;
+
+            .header-main {
+                a {
+                    text-decoration: none;
+                    cursor: pointer;
+                }
+            }
+
+            .header-content {
+                display: flex;
+                align-items: center;
+
+                .header-name {
+                    margin-right: 30px;
+                }
+
+                .header-action {
+                    display: flex;
+                    align-items: center;
+
+                    &.login {
+                        justify-content: end;
+                    }
+
+                    a {
+                        display: flex;
+                        align-items: center;
+                        margin-right: 40px;
+                        text-decoration: none;
+                        cursor: pointer;
+
+                        svg {
+                            margin-right: 5px;
+                        }
+                    }
+
+                    .button {
+                        padding: 10px;
+                        width: 100px;
+                    }
+                }
+            }
+        }
+
+
+
+
+    }
+}

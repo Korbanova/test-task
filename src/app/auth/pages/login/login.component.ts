@@ -52,7 +52,7 @@ export class LoginComponent implements OnDestroy {
                         if (errorResponse.error && errorResponse.error.message) {
                             this._snackBar.open(errorResponse.error.message, "X");
                         } else {
-                            this._snackBar.open('Ошибка при авторизации', "X", {"duration": 3000});
+                            this._snackBar.open('Ошибка при авторизации', "X");
                         }
                     }
                 })

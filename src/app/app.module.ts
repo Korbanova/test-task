@@ -8,16 +8,15 @@ import {LayoutComponent} from "../shared/layout/layout.component";
 import {HeaderComponent} from "../shared/layout/header/header.component";
 import {RouterModule} from "@angular/router";
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from "@angular/material/snack-bar";
-import {MatMenuModule} from "@angular/material/menu";
-import {MatIconModule} from "@angular/material/icon";
-import {MatButtonModule} from "@angular/material/button";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MainComponent} from "./main/main.component";
 
 @NgModule({
     declarations: [
         AppComponent,
         LayoutComponent,
-        HeaderComponent
+        HeaderComponent,
+        MainComponent
     ],
     imports: [
         BrowserModule,
