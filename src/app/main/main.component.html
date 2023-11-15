@@ -9,13 +9,13 @@
                     <li>
                         <a routerLink="/inventory">Inventory</a>
                     </li>
-                    <li>
+                    <li *ngIf="isLogIn">
                         <a routerLink="/reports">Reports</a>
                     </li>
-                    <li>
+                    <li *ngIf="isLogIn">
                         <a routerLink="/billing">Billing</a>
                     </li>
-                    <li>
+                    <li *ngIf="isLogIn">
                         <a routerLink="/profile">Profile</a>
                     </li>
                 </ul>

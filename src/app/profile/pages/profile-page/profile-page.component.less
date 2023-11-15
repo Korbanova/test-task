@@ -1,0 +1,60 @@
+@import "../../../../assets/styles/_variables";
+
+.profile {
+    .container {
+        .profile-title {
+            margin-bottom: 40px;
+            font-size: 36px;
+            color: @purple-text-color;
+        }
+
+        .data-form {
+            margin-bottom: 20px;
+            max-width: 646px;
+
+            .data-form-inputs {
+                .data-form-input {
+                    position: relative;
+                    margin-bottom: 5px;
+                    width: 422px;
+                    transition: all 0.3s linear;
+                }
+                .input{
+                    width: 100%;
+                }
+                .invalid-feedback {
+                    position: absolute;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 10px;
+                    top: 0;
+                    left: 440px;
+                    width: 230px;
+                    height: 100%;
+                    background-color: #f6e1e1;
+                    border-radius: 10px;
+                    box-sizing: border-box;
+                    color: @gray-text-color;
+
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        left: -20px;
+                        bottom: 18px;
+                        border: 10px solid transparent;
+                        border-right: 10px solid #f6e1e1;
+
+                    }
+                }
+            }
+        }
+
+        .button{
+            &[disabled] {
+                background: #a0a0a2;
+                cursor: default;
+            }
+        }
+    }
+}

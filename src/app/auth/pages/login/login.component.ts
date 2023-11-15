@@ -1,7 +1,6 @@
 import {Component, OnDestroy} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {HttpErrorResponse} from "@angular/common/http";
 import {ReplaySubject, takeUntil} from "rxjs";
 import {DefaultResponseType} from "../../../../types/default-response.type";
 import {AuthService} from "../../../../core/services";
@@ -48,9 +47,9 @@ export class LoginComponent implements OnDestroy {
                         this._snackBar.open('Вы успешно авторизовались', "X", {"duration": 3000});
                         this.router.navigate(['/']);
                     },
-                    error: (errorResponse: HttpErrorResponse) => {
-                        if (errorResponse.error && errorResponse.error.message) {
-                            this._snackBar.open(errorResponse.error.message, "X");
+                    error: (errorResponse: DefaultResponseType) => {
+                        if (errorResponse.error && errorResponse.message) {
+                            this._snackBar.open(errorResponse.message, "X");
                         } else {
                             this._snackBar.open('Ошибка при авторизации', "X");
                         }

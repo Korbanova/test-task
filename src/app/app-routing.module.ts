@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {LayoutComponent} from "../shared/layout/layout.component";
 import {AuthForwardGuard} from "../core/guard/auth-forward.guard";
 import {MainComponent} from "./main/main.component";
+import {AuthGuard} from "../core/guard/auth.guard";
 
 const routes: Routes = [
     {
@@ -15,7 +16,7 @@ const routes: Routes = [
             {path: '', loadChildren: () => import('app/inventory/inventory.module').then(m => m.InventoryModule)},
             {path: '', loadChildren: () => import('app/reports/reports.module').then(m => m.ReportsModule)},
             {path: '', loadChildren: () => import('app/billing/billing.module').then(m => m.BillingModule)},
-            {path: '', loadChildren: () => import('app/profile/profile.module').then(m => m.ProfileModule)},
+            {path: '', loadChildren: () => import('app/profile/profile.module').then(m => m.ProfileModule),  canActivate:[AuthGuard]},
             {path: '**', redirectTo: '', pathMatch: 'full'},
         ]
     }

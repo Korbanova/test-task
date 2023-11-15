@@ -1,6 +1,112 @@
 <section class="profile">
     <div class="container">
-        PROFILE PAGE
+
+        <div class="profile-title">
+            PROFILE PAGE
+        </div>
+
+        <div class="data-form" [formGroup]="userInfoForm">
+            <div class="data-form-inputs personal-data-inputs">
+                <div class="data-form-input">
+                    <input type="text" class="input"
+                           placeholder="E-mail"
+                           readonly
+                           formControlName="email">
+                </div>
+
+                <div class="data-form-input">
+                    <input type="text" class="input" placeholder="Имя"
+                           formControlName="firstName"
+                           [ngStyle]="{'border-color': userInfoForm.get('firstName')?.invalid
+                 && (userInfoForm.get('firstName')?.dirty || userInfoForm.get('firstName')?.touched) ?'red': ''}">
+
+                    <div class="invalid-feedback"
+                         *ngIf="userInfoForm.get('firstName')?.invalid && (userInfoForm.get('firstName')?.dirty || userInfoForm.get('firstName')?.touched)">
+                        <div *ngIf="userInfoForm.get('firstName')?.errors?.['required']">
+                            Имя должно быть заполнено.
+                        </div>
+                        <div *ngIf="userInfoForm.get('firstName')?.errors?.['pattern']">
+                            Имя должно содержать не более 255 символов.
+                        </div>
+
+                        <div *ngIf="userInfoForm.get('firstName')?.errors?.['firstName']">
+                            Имя некорректно.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-form-input">
+                    <input type="text" class="input" placeholder="Фамилия"
+                           formControlName="lastName"
+                           [ngStyle]="{'border-color': userInfoForm.get('lastName')?.invalid
+                 && (userInfoForm.get('lastName')?.dirty || userInfoForm.get('lastName')?.touched) ?'red': ''}">
+
+                    <div class="invalid-feedback"
+                         *ngIf="userInfoForm.get('lastName')?.invalid && (userInfoForm.get('lastName')?.dirty || userInfoForm.get('lastName')?.touched)">
+                        <div *ngIf="userInfoForm.get('lastName')?.errors?.['required']">
+                            Фамилия должна быть заполнена.
+                        </div>
+                        <div *ngIf="userInfoForm.get('lastName')?.errors?.['pattern']">
+                            Фамилия должна содержать не более 255 символов.
+                        </div>
+
+                        <div *ngIf="userInfoForm.get('lastName')?.errors?.['lastName']">
+                            Фамилия некорректна.
+                        </div>
+                    </div>
+                </div>
+                <div class="data-form-input">
+                    <input type="text" class="input" placeholder="Телефон"
+                           formControlName="phone"
+                           prefix="+7 "  mask="000 000 00 00"  [showMaskTyped]= "true"
+                           [ngStyle]="{'border-color': userInfoForm.get('phone')?.invalid
+                 && (userInfoForm.get('phone')?.dirty || userInfoForm.get('phone')?.touched) ?'red': ''}">
+
+                    <div class="invalid-feedback"
+                         *ngIf="userInfoForm.get('phone')?.invalid && (userInfoForm.get('phone')?.dirty || userInfoForm.get('phone')?.touched)">
+                        <div *ngIf="userInfoForm.get('phone')?.errors?.['required']">
+                            Телефон должен быть заполнен.
+                        </div>
+                        <div *ngIf="userInfoForm.get('phone')?.errors?.['pattern']">
+                            Телефон должнен содержать 10 цифр.
+                        </div>
+
+                        <div *ngIf="userInfoForm.get('phone')?.errors?.['phone']">
+                            Телефон некорректен.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-form-input">
+                    <input type="text" class="input" placeholder="WebSite URL"
+                           formControlName="webSiteURL"
+                           [ngStyle]="{'border-color': userInfoForm.get('webSiteURL')?.invalid
+                 && (userInfoForm.get('webSiteURL')?.dirty || userInfoForm.get('webSiteURL')?.touched) ?'red': ''}">
+
+                    <div class="invalid-feedback"
+                         *ngIf="userInfoForm.get('webSiteURL')?.invalid && (userInfoForm.get('webSiteURL')?.dirty || userInfoForm.get('webSiteURL')?.touched)">
+                        <div *ngIf="userInfoForm.get('webSiteURL')?.errors?.['required']">
+                            URL должен быть заполнен.
+                        </div>
+                        <div *ngIf="userInfoForm.get('webSiteURL')?.errors?.['pattern']">
+                            URL некорректен.
+                        </div>
+
+                        <div *ngIf="userInfoForm.get('webSiteURL')?.errors?.['phone']">
+                            URL некорректен.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <button class="button"
+                [disabled]="!(userInfoForm.dirty && userInfoForm.valid)"
+                (click)="updateUserInfo()">
+            Сохранить
+        </button>
     </div>
+
 </section>
 

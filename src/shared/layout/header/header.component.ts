@@ -12,6 +12,7 @@ import {Router} from "@angular/router";
 export class HeaderComponent implements OnInit{
     userInfo: UserInfoType | null = null;
 
+
     constructor(private authService: AuthService,
                 private _snackBar: MatSnackBar,
                 private router: Router) {
