@@ -1,16 +1,20 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatSnackBar, MatSnackBarVerticalPosition} from "@angular/material/snack-bar";
 import {FormBuilder, Validators} from "@angular/forms";
 import {UserService} from "../../services/user.service";
 import {UserInfoResponseType} from "../../../../types/user-info-response.type";
 import {DefaultResponseType} from "../../../../types/default-response.type";
+import {Subscription} from "rxjs";
 
 @Component({
     selector: 'app-profile-page',
     templateUrl: './profile-page.component.html',
     styleUrls: ['./profile-page.component.less']
 })
-export class ProfilePageComponent implements OnInit {
+export class ProfilePageComponent implements OnInit, OnDestroy {
+    private subscriptionGet: Subscription | null = null;
+    private subscriptionUpdate: Subscription | null = null;
+
     userInfoForm = this.fb.group({
         firstName: ['', [Validators.required, Validators.pattern(/^[A-zА-я\-0-9]{1,255}$/)]],
         lastName: ['', [Validators.required, Validators.pattern(/^[A-zА-я\-0-9]{1,255}$/)]],
@@ -26,7 +30,7 @@ export class ProfilePageComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.userService.getUserInfo()
+        this.subscriptionGet = this.userService.getUserInfo()
             .subscribe((data: UserInfoResponseType | DefaultResponseType) => {
                 if ((data as DefaultResponseType).error !== undefined) {
                     throw new Error((data as DefaultResponseType).message);
@@ -48,7 +52,6 @@ export class ProfilePageComponent implements OnInit {
     }
 
     updateUserInfo() {
-        console.log('updateUserInfo');
         if (this.userInfoForm.valid) {
             const paramObject: UserInfoResponseType = {
                 email: this.userInfoForm.value.email ? this.userInfoForm.value.email : '',
@@ -61,7 +64,7 @@ export class ProfilePageComponent implements OnInit {
                 paramObject.webSiteURL = this.userInfoForm.value.webSiteURL;
             }
 
-            this.userService.updateUserInfo(paramObject)
+            this.subscriptionUpdate = this.userService.updateUserInfo(paramObject)
                 .subscribe({
                     next: (data: DefaultResponseType) => {
                         if (data.error) {
@@ -89,5 +92,11 @@ export class ProfilePageComponent implements OnInit {
                     }
                 })
         }
+    }
+
+    ngOnDestroy() {
+        this.subscriptionGet?.unsubscribe();
+        this.subscriptionUpdate?.unsubscribe();
+
     }
 }
