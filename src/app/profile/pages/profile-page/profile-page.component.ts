@@ -97,6 +97,5 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         this.subscriptionGet?.unsubscribe();
         this.subscriptionUpdate?.unsubscribe();
-
     }
 }

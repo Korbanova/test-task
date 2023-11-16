@@ -1,16 +1,18 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from "../../../core/services";
 import {UserInfoType} from "../../../types/user-info.type";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
+import {Subscription} from "rxjs";
 
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.less']
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit, OnDestroy {
     userInfo: UserInfoType | null = null;
+    private subscription: Subscription | null = null;
 
 
     constructor(private authService: AuthService,
@@ -22,7 +24,7 @@ export class HeaderComponent implements OnInit{
     }
 
     ngOnInit(): void {
-        this.authService.isLogged$
+        this.subscription = this.authService.isLogged$
             .subscribe((isLoggedIn: boolean) => {
                 this.userInfo = isLoggedIn ? this.authService.getUserInfo() : null;
             })
@@ -30,8 +32,12 @@ export class HeaderComponent implements OnInit{
 
     logout(): void {
         this.authService.removeUserInfo();
-        this._snackBar.open('Вы вышли из сиситемы',"X", {"duration": 3000});
+        this._snackBar.open('Вы вышли из сиситемы', "X", {"duration": 3000});
         this.router.navigate(['/']);
+    }
+
+    ngOnDestroy() {
+        this.subscription?.unsubscribe();
     }
 
 }

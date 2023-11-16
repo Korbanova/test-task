@@ -31,7 +31,7 @@ export class UserService {
         return new Observable(observer => {
             observer.next({
                 firstName: 'Kate',
-                lastName: 'Ivanova',
+                lastName: 'Petrova',
                 phone: '9137053423',
                 email: 'test34@test',
                 // webSiteURL: 'http://dfdf.com'
